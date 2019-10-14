@@ -1,31 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Kaggle</title>
-
-    <!-- Vue.js -->
-    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
-
-    <!-- our CSS -->
-    <link rel="stylesheet" href="styles.css"/>
-</head>
-<body>
-    <div id="mount-target">
-       
-          
-          <p>Test to acquire Kaggle dataset</p>
-        </header>
-
-    </div>
-
-   
-    </main>
-
-   
-
-
-    <script src="kaggle.js"></script>
-</body>
+<!DOCTYPE html> 
+  
+<html> 
+<head> 
+    <title>Test to display kaggle data</title> 
+</head> 
+<body> 
+  
+<ol> 
+<!-- For loop logic of jinja template -->
+{%for i in range(0, len)%} 
+  
+    <li>{{raw_array[i]}}</li> 
+{%endfor%} 
+  
+</ol> 
+  
+</body> 
+</html> 
