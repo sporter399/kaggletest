@@ -1,5 +1,5 @@
 var api = {
-    root: "https://api.kaggle.com",
+    root: "https://kaggle.com",
     token: "920d2ddd826ff7dbdfa508cf8a168f71" 
   }
   console.log("line 5"); 
@@ -11,11 +11,11 @@ var api = {
             APIdata: [],
           };
       },
-    
-      
+       
+      /*
       methods: {
           testAPI: function () {
-              
+              console.log("line 18");
               fetch(`${api.root}/configuration?api_key=${api.token}`)
                       .then(resp => resp.ok ? resp.json() : Promise.reject(resp))
                       .then((response) => {
@@ -25,9 +25,13 @@ var api = {
   
                       });
           },
-          
+    
           
       },
-     
+      mounted: function () {
+          this.testAPI();
+      }
+      */
   });
+  
   
