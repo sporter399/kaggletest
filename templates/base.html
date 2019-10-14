@@ -6,14 +6,10 @@
 </head> 
 <body> 
   
-<ol> 
-<!-- For loop logic of jinja template -->
-{%for i in range(0, len)%} 
+
+    <p>Age of one particular applicant here:   {{output}}</p>
   
-    <li>{{raw_array[i]}}</li> 
-{%endfor%} 
-  
-</ol> 
+    <p>List of ages less than 50 here:  {{ age_var }}</p>
   
 </body> 
 </html> 
