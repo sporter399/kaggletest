@@ -22,7 +22,7 @@ def raw_data():
 
     raw_array = []
     raw_array.append(trainDF)
-    
+    print("line 25 in python")
     
     return render_template('rawdata.html',raw_array=raw_array)
 
@@ -30,14 +30,18 @@ def raw_data():
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
+
+    raw_array = []
+    raw_array.append(trainDF)
+    print("raw_array in python code    " + str(raw_array))
+    print("line 33 in python")
     
-    
-    return render_template('rawdata.html')
+    return render_template('base.html',len = len(raw_array),raw_array=raw_array)
 
 
 
 
-print(trainDF)
+##print(trainDF)
 
 if __name__ == '__main__':
     app.run()
