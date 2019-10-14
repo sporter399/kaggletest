@@ -3,10 +3,15 @@ import numpy as np
 import csv
 from flask import Flask, request, redirect, render_template, session, flash
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 import os
 import sqlite3
 
 trainDF = pd.read_csv('cs-test.csv')
+
+engine = create_engine('sqlite://', echo=False)
+trainDF.to_sql('applicants', con=engine)
+engine.execute("SELECT * FROM applicants").fetchall()
 
 app = Flask(__name__)
 
