@@ -12,7 +12,10 @@ trainDF = pd.read_csv('cs-test.csv')
 
 conn = sqlite3.connect('applicant_info.db')
 c = conn.cursor()
-c.execute('CREATE TABLE APPLICANTS (SeriousDlqin2yrs number,RevolvingUtilizationOfUnsecuredLines float, age number,NumberOfTime30to59DaysPastDueNotWorse number,DebtRatio float,MonthlyIncome number,NumberOfOpenCreditLinesAndLoans number,NumberOfTimes90DaysLate number,NumberRealEstateLoansOrLines number,NumberOfTime60to89DaysPastDueNotWorse number,NumberOfDependents number)')
+
+
+
+c.execute('CREATE TABLE IF NOT EXISTS APPLICANTS (SeriousDlqin2yrs number,RevolvingUtilizationOfUnsecuredLines float, age number,NumberOfTime30to59DaysPastDueNotWorse number,DebtRatio float,MonthlyIncome number,NumberOfOpenCreditLinesAndLoans number,NumberOfTimes90DaysLate number,NumberRealEstateLoansOrLines number,NumberOfTime60to89DaysPastDueNotWorse number,NumberOfDependents number)')
 conn.commit()
 Applicants = trainDF
 
@@ -21,11 +24,25 @@ trainDF.to_sql('APPLICANTS', conn, if_exists='replace', index = False)
  
 c.execute('''  
 SELECT * FROM APPLICANTS
-          ''')
+        ''')
+
+sql_age = []
+c.execute("SELECT age FROM APPLICANTS;")
+result = c.fetchall()
+
+ints_only = [item[0] for item in result] 
+
+for i in range(len(ints_only)):
+    
+    test_var = int(ints_only[i])
+    
+    if test_var < 24:
+        sql_age.append(test_var)
 
 
 
 app = Flask(__name__)
+
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -33,16 +50,21 @@ def index():
 
     output = trainDF.at[227, 'age']
     age_var = []
+    
+    
 
     for i in range(len(trainDF.index)):
         ret_age = trainDF.at[i, 'age']
-        if ret_age < 50:
+        if ret_age < 24:
             age_var.append(ret_age)
+
+    
+    
         
         
     
     
-    return render_template('base.html',output=output, age_var=age_var)
+    return render_template('base.html',output=output, age_var=age_var, sql_age=sql_age)
 
 if __name__ == '__main__':
     app.run()
