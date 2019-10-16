@@ -26,6 +26,11 @@ c.execute('''
 SELECT * FROM APPLICANTS
         ''')
 
+
+app = Flask(__name__)
+
+
+
 sql_age = []
 c.execute("SELECT age FROM APPLICANTS;")
 result = c.fetchall()
@@ -33,38 +38,32 @@ result = c.fetchall()
 ints_only = [item[0] for item in result] 
 
 for i in range(len(ints_only)):
-    
+        
     test_var = int(ints_only[i])
-    
+        
     if test_var < 24:
         sql_age.append(test_var)
+    
+    
+
+    
 
 
 
-app = Flask(__name__)
+
+
+
 
 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
-    output = trainDF.at[227, 'age']
-    age_var = []
-    
-    
-
-    for i in range(len(trainDF.index)):
-        ret_age = trainDF.at[i, 'age']
-        if ret_age < 24:
-            age_var.append(ret_age)
-
-    
     
         
-        
     
     
-    return render_template('base.html',output=output, age_var=age_var, sql_age=sql_age)
+    return render_template('base.html', sql_age=sql_age)
 
 if __name__ == '__main__':
     app.run()

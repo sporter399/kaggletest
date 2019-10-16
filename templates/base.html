@@ -2,15 +2,36 @@
   
 <html> 
 <head> 
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>Test to display kaggle data</title> 
-</head> 
-<body> 
+
+    <!-- Vue.js -->
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+<body>
+    <main class="mount-point">
+       
+        <span>{{ revolvingUtilizationOfUnsecuredLines }}</span>
+
+    </main>
+    <p>List of ages less than 24, from sql data via python, here:  {{ sql_age }}</p>
+
+
+
+
+
+
+
+ 
   
 
-    <p>Age of one particular applicant here:   {{output}}</p>
+    
   
-    <p>List of ages less than 24, from csv data, here:  {{ age_var }}</p>
-    <p>List of ages less than 24, from sql data, here:  {{ sql_age }}</p>
-  
+    
+    
+    <script src="kagglevue.js"></script>
 </body> 
 </html> 
