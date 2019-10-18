@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from pandas import DataFrame
 import os
-import sqlite3
+from app import create_app
 
 trainDF = pd.read_csv('cs-test.csv')
 
@@ -44,26 +44,32 @@ for i in range(len(ints_only)):
     if test_var < 24:
         sql_age.append(test_var)
     
-    
 
-    
+def add_vue_routes(app):
+    @app.route('/')
+    def serve_vue_app():
+        """
+        Server our vue app
+        """
+        return(render_template('index.html'))
 
 
-
-
-
-
-
-
+    @app.after_request
+    def add_header(req):
+        """
+        Clear Cache for hot-reloading
+        """
+        req.headers["Cache-Control"] = "no-cache"
+        return req 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
     
-        
-    
-    
     return render_template('base.html', sql_age=sql_age)
 
 if __name__ == '__main__':
-    app.run()
+    app = create_app()
+    add_vue_routes(app)
+    
+    app.run(debug=True)
