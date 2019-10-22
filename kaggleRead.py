@@ -48,10 +48,11 @@ for i in range(len(ints_only)):
 def add_vue_routes(app):
     @app.route('/')
     def serve_vue_app():
+        print("line 51 in kaggleRead")
         """
         Server our vue app
         """
-        return(render_template('index.html'))
+        return(render_template('base.html'))
 
 
     @app.after_request
